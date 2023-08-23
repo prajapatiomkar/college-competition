@@ -22,7 +22,7 @@ export default function Header() {
 
   return (
     <header className="flex justify-between p-5 shadow-sm text-md">
-      <Link className="capitalize">Logo</Link>
+      <Link className="capitalize">college-competition</Link>
       <nav className="child:capitalize flex gap-5">
         {userInfo ? (
           <>

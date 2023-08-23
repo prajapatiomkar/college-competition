@@ -100,9 +100,7 @@ export default function RegisterScreen() {
           />
         </div>
 
-        <button className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-          Register
-        </button>
+        <button className="button">Register</button>
         <p className="text-xs text-gray-500 mt-3">
           Already a user ?{" "}
           <Link to="/login" className="hyperlink">
