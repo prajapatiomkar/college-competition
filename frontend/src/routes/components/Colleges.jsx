@@ -7,7 +7,7 @@ export default function Colleges() {
 
   return (
     <div className="flex mt-10 gap-3">
-      {!isLoading &&
+      {!isLoading &&  
         colleges.map((college) => (
           <div className="border px-6 py-3">
             <p className="">{college.name}</p>
