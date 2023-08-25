@@ -12,7 +12,6 @@ export default function AdminRoute() {
       ) : (
         <Navigate to="/register" replace />
       )}
-      ;
     </>
   );
 }

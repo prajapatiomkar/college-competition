@@ -9,25 +9,56 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import HomeScreen from "./screens/HomeScreen.jsx";
-import LoginScreen from "./screens/LoginScreen.jsx";
-import RegisterScreen from "./screens/RegisterScreen.jsx";
+import HomeScreen from "./routes/screens/HomeScreen.jsx";
+import LoginScreen from "./routes/screens/LoginScreen.jsx";
+import RegisterScreen from "./routes/screens/RegisterScreen.jsx";
 import { Provider, useSelector } from "react-redux";
 import { store } from "./app/store.js";
 import AdminRoute from "./helper/auth/AdminRoute.jsx";
-import DashboardScreen from "./screens/DashboardScreen.jsx";
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<App />}>
-      <Route index element={<HomeScreen />} />
-      <Route path="/login" element={<LoginScreen />} />
-      <Route path="/register" element={<RegisterScreen />} />
-      <Route element={<AdminRoute />}>
-        <Route path="/dashboard" element={<DashboardScreen />} />
-      </Route>
-    </Route>
-  )
-);
+import DashboardScreen from "./routes/screens/DashboardScreen.jsx";
+import Root from "./routes/components/Root.jsx";
+import CreateCollege from "./routes/components/CreateCollege.jsx";
+import Colleges from "./routes/components/Colleges.jsx";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    children: [
+      {
+        index: true,
+        element: <HomeScreen />,
+      },
+      {
+        path: "/login",
+        element: <LoginScreen />,
+      },
+      {
+        path: "/register",
+        element: <RegisterScreen />,
+      },
+      {
+        element: <AdminRoute />,
+        children: [
+          {
+            path: "/dashboard",
+            element: <DashboardScreen />,
+            children: [
+              {
+                index: true,
+                element: <Colleges />,
+              },
+              {
+                path: "/dashboard/create-college",
+                element: <CreateCollege />,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>

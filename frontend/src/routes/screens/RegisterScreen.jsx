@@ -6,8 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   useRegisterMutation,
   useProfileQuery,
-} from "../features/users/usersSlice";
-import { setCredentials } from "../features/authSlice";
+} from "../../features/users/usersSlice.js";
+import { setCredentials } from "../../features/authSlice.js";
 
 export default function RegisterScreen() {
   const [userRegister, { isLoading }] = useRegisterMutation();

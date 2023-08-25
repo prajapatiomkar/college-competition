@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
-import { useLoginMutation } from "../features/users/usersSlice.js";
+import { useLoginMutation } from "../../features/users/usersSlice.js";
 import { useDispatch, useSelector } from "react-redux";
-import { setCredentials } from "../features/authSlice";
+import { setCredentials } from "../../features/authSlice.js";
 
 export default function LoginScreen() {
   const [userLogin, { isLoading }] = useLoginMutation();
