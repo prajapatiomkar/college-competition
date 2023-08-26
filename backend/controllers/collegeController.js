@@ -30,4 +30,10 @@ const getColleges = asyncHandler(async (req, res) => {
   }
 });
 
+const getCollege = asyncHandler(async (req, res) => {
+  try {
+    const college = await collegeModel.findById( )
+  } catch (error) {}
+});
+
 export { createCollege, getColleges };

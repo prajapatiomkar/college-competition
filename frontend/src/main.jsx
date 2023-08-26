@@ -19,6 +19,7 @@ import DashboardScreen from "./routes/screens/DashboardScreen.jsx";
 import Root from "./routes/components/Root.jsx";
 import CreateCollege from "./routes/components/CreateCollege.jsx";
 import Colleges from "./routes/components/Colleges.jsx";
+import College from "./routes/components/College.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,22 +40,21 @@ const router = createBrowserRouter([
       },
       {
         element: <AdminRoute />,
+
         children: [
           {
-            path: "/dashboard",
-            element: <DashboardScreen />,
-            children: [
-              {
-                index: true,
-                element: <Colleges />,
-              },
-              {
-                path: "/dashboard/create-college",
-                element: <CreateCollege />,
-              },
-            ],
+            index: true,
+            element: <Colleges />,
+          },
+          {
+            path: "/dashboard/create-college",
+            element: <CreateCollege />,
           },
         ],
+      },
+      {
+        path: "/dashboard/college/:id",
+        element: <College />,
       },
     ],
   },

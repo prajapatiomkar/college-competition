@@ -18,8 +18,7 @@ export default function CreateCollege() {
       console.log(data);
       const res = await createCollege(data).unwrap();
       // dispatch(setCredentials({ ...res }));
-      console.log(res);
-      navigate("/dashboard");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }

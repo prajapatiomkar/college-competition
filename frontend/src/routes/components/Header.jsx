@@ -28,7 +28,7 @@ export default function Header() {
           <>
             <Link>Home</Link>
             {userInfo.role === "admin" && (
-              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/dashboard/create-college">Add</Link>
             )}
             <button onClick={logoutHandler}>Logout</button>
           </>
