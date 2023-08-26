@@ -12,17 +12,26 @@ const createCompetition = asyncHandler(async (req, res) => {
   try {
     const { college } = req.body; // Extract collegeId from request body
     const newCompetition = new competitionModel({ ...req.body });
-    const savedCompetition = await newCompetition.save();
+    newCompetition.save();
 
     // Update th}}college's competitions array with the new competition
-    const college_ = await collegeModel.findById(college);
-    college_.competitions.push(savedCompetition._id);
-    await college_.save();
+    // const college_ = await collegeModel.findById(college);
+    // college_.competitions.push(savedCompetition._id);
+    // await college_.save();
 
-    res.json(savedCompetition);
+    res.json(newCompetition);
   } catch (error) {
     res.status(500).json({ error: error });
   }
 });
 
-export { createCompetition };
+const getCompetitions = asyncHandler(async (req, res) => {
+  try {
+    const competitions = await competitionModel.find();
+    res.status(200).json(competitions);
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+export { createCompetition, getCompetitions };

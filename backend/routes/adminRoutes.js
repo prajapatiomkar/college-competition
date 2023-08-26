@@ -5,7 +5,10 @@ import {
   getColleges,
 } from "../controllers/collegeController.js";
 
-import { createCompetition } from "../controllers/competitionController.js";
+import {
+  createCompetition,
+  getCompetitions,
+} from "../controllers/competitionController.js";
 const router = express.Router();
 
 // Public Routes
@@ -15,5 +18,6 @@ router.get("/colleges", getColleges);
 router.get("/college/:id", getCollege);
 
 router.post("/competition", createCompetition);
+router.get("/competitions", getCompetitions);
 
 export default router;
