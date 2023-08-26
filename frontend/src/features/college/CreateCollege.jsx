@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
-import { useLoginMutation } from "../../features/users/usersSlice.js";
+import { useLoginMutation } from "../users/usersSlice.js";
 import { useDispatch, useSelector } from "react-redux";
-import { useCreateCollegeMutation } from "../../features/college/collegeSlice.js";
+import { useCreateCollegeMutation } from "./collegeSlice.js";
 
 export default function CreateCollege() {
   const [createCollege, { isLoading }] = useCreateCollegeMutation();

@@ -1,14 +1,14 @@
 import React from "react";
 
-import { useGetCollegesQuery } from "../../features/college/collegeSlice.js";
+import { useGetCollegesQuery } from "./collegeSlice.js";
 import { Link } from "react-router-dom";
 import { GoLinkExternal } from "react-icons/go";
 export default function Colleges() {
-  const { data: colleges, isLoading } = useGetCollegesQuery();
+  const { data: colleges, isLoading, isSuccess } = useGetCollegesQuery();
 
   return (
-    <div className="flex mt-10 gap-3">
-      {!isLoading && colleges.length === 0 ? (
+    <div className="flex gap-3">
+      {isSuccess && colleges.length === 0 ? (
         <div className="w-full text-center p-20 text-2xl">
           College List Empty
         </div>
@@ -27,7 +27,7 @@ export default function Colleges() {
               </th>
             </tr>
           </thead>
-          {!isLoading &&
+          {isSuccess &&
             colleges.map((college) => (
               <tbody key={college._id}>
                 <tr className="border px-6 py-3">
@@ -41,7 +41,7 @@ export default function Colleges() {
                     <span className="font-medium"></span> {college.location}
                   </td>
                   <td className="px-4 py-3">
-                    <Link to={`/dashboard/college/${college._id}`}>
+                    <Link to={`/college/${college._id}`}>
                       <GoLinkExternal />
                     </Link>
                   </td>

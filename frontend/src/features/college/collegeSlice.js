@@ -19,7 +19,18 @@ export const collegeAPI = apiSlice.injectEndpoints({
       }),
       providesTags: ["College"],
     }),
+    getCollege: builder.query({
+      query: (id) => ({
+        url: `/admin/college/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["College"],
+    }),
   }),
 });
 
-export const { useCreateCollegeMutation, useGetCollegesQuery } = collegeAPI;
+export const {
+  useCreateCollegeMutation,
+  useGetCollegesQuery,
+  useGetCollegeQuery,
+} = collegeAPI;

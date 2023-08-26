@@ -24,7 +24,7 @@ const createCollege = asyncHandler(async (req, res) => {
 const getColleges = asyncHandler(async (req, res) => {
   try {
     const colleges = await collegeModel.find().populate("competitions");
-    res.json(colleges);
+    res.status(200).json(colleges);
   } catch (error) {
     res.status(500).json({ error: "Server error" });
   }
@@ -32,8 +32,11 @@ const getColleges = asyncHandler(async (req, res) => {
 
 const getCollege = asyncHandler(async (req, res) => {
   try {
-    const college = await collegeModel.findById( )
+    const college = await collegeModel
+      .findById(req.params.id)
+      .populate("competitions");
+    res.status(200).json(college);
   } catch (error) {}
 });
 
-export { createCollege, getColleges };
+export { createCollege, getColleges, getCollege };

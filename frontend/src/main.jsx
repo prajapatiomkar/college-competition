@@ -17,9 +17,10 @@ import { store } from "./app/store.js";
 import AdminRoute from "./helper/auth/AdminRoute.jsx";
 import DashboardScreen from "./routes/screens/DashboardScreen.jsx";
 import Root from "./routes/components/Root.jsx";
-import CreateCollege from "./routes/components/CreateCollege.jsx";
-import Colleges from "./routes/components/Colleges.jsx";
-import College from "./routes/components/College.jsx";
+import CreateCollege from "./features/college/CreateCollege.jsx";
+import Colleges from "./features/college/Colleges.jsx";
+import College from "./features/college/College.jsx";
+import CreateCompetition from "./features/competition/createCompetition.jsx";
 
 const router = createBrowserRouter([
   {
@@ -47,13 +48,14 @@ const router = createBrowserRouter([
             element: <Colleges />,
           },
           {
-            path: "/dashboard/create-college",
+            path: "/create-college",
             element: <CreateCollege />,
           },
+         
         ],
       },
       {
-        path: "/dashboard/college/:id",
+        path: "/college/:id",
         element: <College />,
       },
     ],
