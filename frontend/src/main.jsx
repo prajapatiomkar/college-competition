@@ -21,6 +21,8 @@ import CreateCollege from "./features/college/CreateCollege.jsx";
 import Colleges from "./features/college/Colleges.jsx";
 import College from "./features/college/College.jsx";
 import CreateCompetition from "./features/competition/createCompetition.jsx";
+import EditCompetition from "./features/competition/EditCompetition.jsx";
+import DeleteCompetition from "./features/competition/DeleteCompetition.jsx";
 
 const router = createBrowserRouter([
   {
@@ -51,12 +53,19 @@ const router = createBrowserRouter([
             path: "/create-college",
             element: <CreateCollege />,
           },
-         
         ],
       },
       {
         path: "/college/:id",
         element: <College />,
+      },
+      {
+        path: "/college/edit/:id",
+        element: <EditCompetition />,
+      },
+      {
+        path: "/admin/delete-competition/:id",
+        element: <DeleteCompetition />,
       },
     ],
   },

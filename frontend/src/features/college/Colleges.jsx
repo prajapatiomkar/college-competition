@@ -16,13 +16,13 @@ export default function Colleges() {
         <table className="table-auto w-full text-left whitespace-no-wrap">
           <thead>
             <tr>
-              <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">
+              <th className="table-style-head rounded-tl rounded-bl">
                 College
               </th>
-              <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+              <th className="table-style-head">
                 Location
               </th>
-              <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+              <th className="table-style-head">
                 Visit
               </th>
             </tr>

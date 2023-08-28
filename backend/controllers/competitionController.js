@@ -33,5 +33,39 @@ const getCompetitions = asyncHandler(async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+const getCompetition = asyncHandler(async (req, res) => {
+  try {
+    const competition = await competitionModel.findById(req.params.id);
+    res.status(200).json(competition);
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
 
-export { createCompetition, getCompetitions };
+const updateCompetition = asyncHandler(async (req, res) => {
+  try {
+    const competition = await competitionModel.findById(req.body._id);
+
+    const updatedCompetition = await competition.updateOne({ ...req.body });
+    res.status(204).json(updatedCompetition);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+const deleteCompetition = asyncHandler(async (req, res) => {
+  try {
+    const competition = await competitionModel.findByIdAndDelete(req.params.id);
+
+    res.status(204).json(competition);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+export {
+  createCompetition,
+  getCompetitions,
+  updateCompetition,
+  getCompetition,
+  deleteCompetition,
+};

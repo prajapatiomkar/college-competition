@@ -9,38 +9,45 @@ import {
 } from "../../features/users/usersSlice.js";
 import { setCredentials } from "../../features/authSlice.js";
 
-export default function RegisterScreen() {
+import {
+  useCreateCompetitionMutation,
+  useGetCompetitionQuery,
+  useUpdateCompetitionMutation,
+} from "../competition/competitionSilce.js";
 
-  
-
-  const [userRegister, { isLoading }] = useRegisterMutation();
+export default function EditCompetition() {
+  const { id } = useParams();
+  const {
+    data: getCompetition,
+    isSuccess: getCompetitionIsSuccess,
+    isLoading: getCompetitionLoding,
+  } = useGetCompetitionQuery(id);
+  const [updateCompetition, { isLoading }] = useUpdateCompetitionMutation();
   // const { userProfileData, isLoading: profileDataLoding } = useProfileQuery();
   const { userInfo } = useSelector((state) => state.auth);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const onSubmitHandler = async (data) => {
-    if (data.password !== data.confirmPassword) {
-      console.log("those passwords don't match. Try again.");
-      return;
-    } else {
-      try {
-        const res = await userRegister(data).unwrap();
-        dispatch(setCredentials({ ...res }));
-        // console.log(userProfileData);
-        navigate("/");
-      } catch (error) {
-        console.log(error);
-      }
+    try {
+      data = { ...data, _id: id };
+      const res = await updateCompetition(data).unwrap();
+      // dispatch(setCredentials({ ...res }));
+      // console.log(userProfileData);
+      navigate(-1);
+    } catch (error) {
+      console.log(error);
     }
   };
 
   useEffect(() => {
-    if (userInfo) {
-      navigate(`/`);
-    }
-  }, [navigate, userInfo]);
+    try {
+      setValue("name", getCompetition.name);
+      setValue("description", getCompetition.description);
+      setValue("startdate", getCompetition.startdate);
+      setValue("enddate", getCompetition.enddate);
+    } catch (error) {}
+  }, [navigate]);
 
   return (
     <section className="mt-7">
@@ -49,7 +56,7 @@ export default function RegisterScreen() {
         className="lg:w-1/3 md:w-1/2 bg-white rounded-lg p-8 flex flex-col md:mx-auto w-full md:mt-0 relative z-10 shadow-md "
       >
         <h2 className="text-gray-900 text-lg mb-1 font-medium title-font border-b pb-2 text-center">
-          Register
+          Edit Section
         </h2>
         <div className="relative mb-4 mt-5">
           <label htmlFor="name" className="leading-7 text-sm text-gray-600">
@@ -64,52 +71,49 @@ export default function RegisterScreen() {
           />
         </div>
         <div className="relative mb-4">
-          <label htmlFor="email" className="leading-7 text-sm text-gray-600">
-            Email
+          <label
+            htmlFor="description"
+            className="leading-7 text-sm text-gray-600"
+          >
+            description
           </label>
           <input
-            type="email"
-            id="email"
-            name="email"
+            type="text"
+            id="description"
+            name="description"
             className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            {...register("email", { required: true })}
-          />
-        </div>
-        <div className="relative mb-4">
-          <label htmlFor="password" className="leading-7 text-sm text-gray-600">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            {...register("password", { required: true })}
+            {...register("description", { required: true })}
           />
         </div>
         <div className="relative mb-4">
           <label
-            htmlFor="confirmPassword"
+            htmlFor="startdate"
             className="leading-7 text-sm text-gray-600"
           >
-            Confirm Password
+            Start Date
           </label>
           <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
+            type="date"
+            id="startdate"
+            name="startdate"
             className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            {...register("confirmPassword", { required: true })}
+            {...register("startdate", { required: true })}
+          />
+        </div>
+        <div className="relative mb-4">
+          <label htmlFor="enddate" className="leading-7 text-sm text-gray-600">
+            End Date
+          </label>
+          <input
+            type="date"
+            id="enddate"
+            name="enddate"
+            className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            {...register("enddate", { required: true })}
           />
         </div>
 
-        <button className="button">Register</button>
-        <p className="text-xs text-gray-500 mt-3">
-          Already a user ?{" "}
-          <Link to="/login" className="hyperlink">
-            Login
-          </Link>
-        </p>
+        <button className="button">Edit</button>
       </form>
     </section>
   );
