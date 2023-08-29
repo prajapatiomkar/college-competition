@@ -21,6 +21,7 @@ import CreateCollege from "./features/college/CreateCollege.jsx";
 import Colleges from "./features/college/Colleges.jsx";
 import College from "./features/college/College.jsx";
 import CreateCompetition from "./features/competition/createCompetition.jsx";
+import UserProfile from "./features/users/userProfile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
         element: <RegisterScreen />,
       },
       {
+        path: "/profile/:id",
+        element: <UserProfile />,
+      },
+      {
         element: <AdminRoute />,
 
         children: [
@@ -51,7 +56,6 @@ const router = createBrowserRouter([
             path: "/create-college",
             element: <CreateCollege />,
           },
-         
         ],
       },
       {

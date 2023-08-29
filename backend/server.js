@@ -6,7 +6,8 @@ import cors from "cors";
 import userRoutes from "./routes/userRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import connectDB from "./configs/db.js";
-
+import multer from "multer";
+const upload = multer({ dest: "/uploads" });
 const app = express();
 
 connectDB();

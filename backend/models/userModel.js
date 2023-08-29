@@ -7,6 +7,7 @@ const userSchema = mongoose.Schema(
     email: { type: String, require: true, unique: true }, // Add email validation
     password: { type: String, require: true }, // Add password validation
     role: { type: String, require: true, default: "user" },
+    image: { type: String },
   },
   { timestamps: true }
 );

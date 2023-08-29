@@ -59,23 +59,27 @@ const logoutController = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "user logout successfully" });
 });
 
-// const getUserProfile = asyncHandler(async (req, res) => {
-//   const user = {
-//     _id: req.user._id,
-//     name: req.user.name,
-//     email: req.user.email,
-//     role: req.user.role,
-//   };
-//   try {
-//     res.status(200).json(user);
-//   } catch (error) {
-//     res.status(401).json({ message: "Not authorized, token failed" });
-//   }
-// });
+const getUserProfile = asyncHandler(async (req, res) => {
+  try {
+    const user = await userModel
+      .findOne({ _id: req.params.id })
+      .select("-password");
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(401).json({ message: "Not authorized, token failed" });
+  }
+});
+
+const updateUserProfile = asyncHandler(async (req, res) => {
+  res.status(200).json({
+    message: "update user",
+  });
+});
 
 export {
   loginController,
   registerController,
   logoutController,
-  // getUserProfile,
+  getUserProfile,
+  updateUserProfile,
 };
