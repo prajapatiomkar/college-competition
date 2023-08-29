@@ -1,10 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useLogoutMutation } from "../../features/users/usersSlice.js";
 import { logout } from "../../features/authSlice.js";
 
 export default function Header() {
+  const { id } = useParams();
   const { userInfo } = useSelector((state) => state.auth);
   const [userLogout, { isLoading }] = useLogoutMutation();
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ export default function Header() {
             {userInfo.role === "admin" && (
               <Link to="/create-college">Create</Link>
             )}
+            <Link to={`/profile/${userInfo._id}`}>Profile</Link>
             <button onClick={logoutHandler}>Logout</button>
           </>
         ) : (
